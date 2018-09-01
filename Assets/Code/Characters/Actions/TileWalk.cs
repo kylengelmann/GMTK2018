@@ -6,78 +6,106 @@ public class TileWalk : MonoBehaviour {
 
     public AnimationCurve movementCurve;
     public float moveTime = .5f;
-    Vector2 _position = Vector2.zero;
+
+    public AnimationCurve bumpCurve;
+    public float bumpTime = .1f;
+    public float bumpDist = .2f;
+
+    Vector2 position;
     bool isMoving;
+    bool isBumping;
     Vector2 lastPos;
     Vector2 moveDir;
 
-    Vector2 nextPos;
-
-    public Vector2 position
-    {
-        get
-        {
-            return _position;
-        }
-        set
-        {
-            lastPos = _position;
-            _position = value;
-            moveDir = _position - lastPos;
-            t = 0f;
-            isMoving = true;
-        }
-    }
+    Vector2 nextMove;
 
     bool nextSet;
 
     float t;
-	
-	void Update () {
+
+    private void Start()
+    {
+        position = new Vector2(Mathf.Floor(transform.position.x), Mathf.Floor(transform.position.y));
+        setTransform(position);
+    }
+
+    void Update () {
         if(!nextSet) {
             if (Input.GetKeyDown(KeyCode.D))
             {
                 nextSet = true;
-                nextPos = _position + Vector2.right;
+                nextMove = Vector2.right;
             }
             else if(Input.GetKeyDown(KeyCode.A))
             {
                 nextSet = true;
-                nextPos = _position - Vector2.right;
+                nextMove = Vector2.left;
             }
             else if(Input.GetKeyDown(KeyCode.W))
             {
                 nextSet = true;
-                nextPos = _position + Vector2.up;
+                nextMove = Vector2.up;
             }
             else if(Input.GetKeyDown(KeyCode.S))
             {
                 nextSet = true;
-                nextPos = _position - Vector2.up;
+                nextMove = Vector2.down;
             }
         }
-        if (!isMoving && nextSet)
+        if (!isMoving && !isBumping && nextSet)
         {
-            position = nextPos;
+            setMove(nextMove);
             nextSet = false;
         }
         
-        if(!isMoving) return;
-        t += Time.deltaTime;
+        if(isMoving){
+            t += Time.deltaTime;
 
-        if(t >= moveTime)
-        {
-            isMoving = false;
-            setPos(_position);
+            if(t >= moveTime)
+            {
+                isMoving = false;
+                setTransform(position);
+                return;
+            }
+
+            float moveDist = movementCurve.Evaluate(t/moveTime);
+
+            setTransform(lastPos + moveDir*moveDist);
         }
+        else if(isBumping)
+        {
+            t += Time.deltaTime;
 
-        float moveDist = movementCurve.Evaluate(t/moveTime);
+            if (t >= bumpTime)
+            {
+                isBumping = false;
+                setTransform(position);
+                return;
+            }
 
-        setPos(lastPos + moveDir*moveDist);
+            float moveDist = bumpDist*bumpCurve.Evaluate(t/bumpTime);
+
+            setTransform(position + moveDir * moveDist);
+        }
     }
 
-    void setPos(Vector2 pos)
+    void setTransform(Vector2 pos)
     {
         transform.position = new Vector3(pos.x, pos.y, transform.position.z);
-    } 
+    }
+
+    void setMove(Vector2 moveDir)
+    {
+        this.moveDir = moveDir;
+        t = 0f;
+        if (Physics2D.OverlapPoint(position + moveDir + new Vector2(.5f, .5f), -1) == null) {
+            lastPos = position;
+            position += moveDir;
+            isMoving = true;
+        }
+        else if(Mathf.Approximately(moveDir.y, 0))
+        {
+            isBumping = true;
+        }
+    }
 }
