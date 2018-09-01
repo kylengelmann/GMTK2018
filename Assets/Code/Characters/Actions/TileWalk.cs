@@ -7,11 +7,8 @@ public class TileWalk : MonoBehaviour {
     public AnimationCurve movementCurve;
     public float moveTime = .5f;
 
-    public AnimationCurve bumpCurve;
-    public float bumpTime = .1f;
-    public float bumpDist = .2f;
-
-    Vector2 position;
+    //Vector2 position;
+    [HideInInspector] public bool canMove = true;
     bool isMoving;
     bool isBumping;
     Vector2 lastPos;
@@ -23,13 +20,15 @@ public class TileWalk : MonoBehaviour {
 
     float t;
 
+    TilePosition tilePos;
+
     private void Start()
     {
-        position = new Vector2(Mathf.Floor(transform.position.x), Mathf.Floor(transform.position.y));
-        setTransform(position);
+        tilePos = GetComponent<TilePosition>();
     }
 
     void Update () {
+        Debug.Log(canMove);
         if(!nextSet) {
             if (Input.GetKeyDown(KeyCode.D))
             {
@@ -52,7 +51,7 @@ public class TileWalk : MonoBehaviour {
                 nextMove = Vector2.down;
             }
         }
-        if (!isMoving && !isBumping && nextSet)
+        if (!isMoving && canMove && nextSet)
         {
             setMove(nextMove);
             nextSet = false;
@@ -64,48 +63,26 @@ public class TileWalk : MonoBehaviour {
             if(t >= moveTime)
             {
                 isMoving = false;
-                setTransform(position);
+                tilePos.setTransform(tilePos.getPosition());
                 return;
             }
 
             float moveDist = movementCurve.Evaluate(t/moveTime);
 
-            setTransform(lastPos + moveDir*moveDist);
-        }
-        else if(isBumping)
-        {
-            t += Time.deltaTime;
-
-            if (t >= bumpTime)
-            {
-                isBumping = false;
-                setTransform(position);
-                return;
-            }
-
-            float moveDist = bumpDist*bumpCurve.Evaluate(t/bumpTime);
-
-            setTransform(position + moveDir * moveDist);
+            tilePos.setTransform(lastPos + moveDir*moveDist);
         }
     }
 
-    void setTransform(Vector2 pos)
-    {
-        transform.position = new Vector3(pos.x, pos.y, transform.position.z);
-    }
-
-    void setMove(Vector2 moveDir)
+    public void setMove(Vector2 moveDir)
     {
         this.moveDir = moveDir;
         t = 0f;
-        if (Physics2D.OverlapPoint(position + moveDir + new Vector2(.5f, .5f), -1) == null) {
-            lastPos = position;
-            position += moveDir;
+        lastPos = tilePos.getPosition();
+
+        Collider2D collider = Physics2D.OverlapPoint(lastPos + moveDir + new Vector2(.5f, .5f), ~LayerMask.GetMask("Player"));
+        if (collider == null || collider.isTrigger) {
+            tilePos.setPosition(lastPos + moveDir);
             isMoving = true;
-        }
-        else if(Mathf.Approximately(moveDir.y, 0))
-        {
-            isBumping = true;
         }
     }
 }

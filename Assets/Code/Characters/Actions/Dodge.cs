@@ -5,9 +5,16 @@ using UnityEngine;
 public class Dodge : MonoBehaviour {
 
     Animator anim;
+    TileWalk walk;
 
 	void Start () {
 		anim = GetComponent<Animator>();
+        AnimationEventReceiver receiver = GetComponent<AnimationEventReceiver>();
+        receiver.onDodgeEnd += onFinishDodge;
+        receiver.startDodging += () => {isDodging = true;};
+        receiver.endDodging += () => {isDodging = false;};
+
+        walk = GetComponent<TileWalk>();
 	}
 	
     Attack.AttackType dodging = Attack.AttackType.Invalid;
@@ -15,8 +22,10 @@ public class Dodge : MonoBehaviour {
     string trigger;
 
 	void Update () {
-        if(dodging != Attack.AttackType.Invalid) return;
-		if(Input.GetKeyDown(KeyCode.DownArrow))
+        if(dodging != Attack.AttackType.Invalid) {
+            return;
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             trigger = "dodgeDown";
             dodging = Attack.AttackType.up;
@@ -37,11 +46,28 @@ public class Dodge : MonoBehaviour {
             anim.ResetTrigger(trigger);
             anim.SetTrigger(trigger);
         }
+        if(dodging != Attack.AttackType.Invalid)
+        {
+            walk.canMove = false;
+        }
 
 	}
 
     void onFinishDodge()
     {
         dodging = Attack.AttackType.Invalid;
+        walk.canMove = true;
+    }
+
+    bool isDodging;
+
+    public bool checkDodge(Attack.AttackType attackType)
+    {
+        if(!isDodging || dodging != attackType)
+        {
+            Debug.Log("Ow!");
+            return false;
+        }
+        return true;
     }
 }
