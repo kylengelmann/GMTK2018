@@ -6,6 +6,7 @@ public class Attack : MonoBehaviour {
 
     public enum AttackType
     {
+        Invalid = -1,
         up = 0,
         mid = 1,
         down = 2
