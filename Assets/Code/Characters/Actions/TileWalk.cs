@@ -11,7 +11,7 @@ public class TileWalk : MonoBehaviour {
     public float bumpTime = .1f;
     public float bumpDist = .2f;
 
-    Vector2 position = Vector2.zero;
+    Vector2 position;
     bool isMoving;
     bool isBumping;
     Vector2 lastPos;
@@ -22,8 +22,14 @@ public class TileWalk : MonoBehaviour {
     bool nextSet;
 
     float t;
-	
-	void Update () {
+
+    private void Start()
+    {
+        position = new Vector2(Mathf.Floor(transform.position.x), Mathf.Floor(transform.position.y));
+        setTransform(position);
+    }
+
+    void Update () {
         if(!nextSet) {
             if (Input.GetKeyDown(KeyCode.D))
             {
