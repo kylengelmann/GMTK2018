@@ -8,8 +8,17 @@ public class Dodge : MonoBehaviour {
     TileWalk walk;
 
 	void Start () {
-		anim = GetComponent<Animator>();
-        AnimationEventReceiver receiver = GetComponent<AnimationEventReceiver>();
+        anim = GetComponent<Animator>();
+        AnimationEventReceiver receiver;
+        if (anim == null)
+        {
+            anim = GetComponentInChildren<Animator>();
+            receiver = GetComponentInChildren<AnimationEventReceiver>();
+        }
+        else
+        {
+            receiver = GetComponent<AnimationEventReceiver>();
+        }
         receiver.onDodgeEnd += onFinishDodge;
         receiver.startDodging += () => {isDodging = true;};
         receiver.endDodging += () => {isDodging = false;};
