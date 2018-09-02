@@ -74,6 +74,7 @@ GameObject:
   - component: {fileID: 61418043079746852}
   - component: {fileID: 114600478651138542}
   - component: {fileID: 61266042551980484}
+  - component: {fileID: 61970315122325942}
   m_Layer: 0
   m_Name: enemyDown
   m_TagString: Untagged
@@ -195,7 +196,7 @@ BoxCollider2D:
   m_EdgeRadius: 0
 --- !u!61 &61970315122325942
 BoxCollider2D:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1804625574946306}
