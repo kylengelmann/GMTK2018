@@ -11,6 +11,8 @@ public class Level : MonoBehaviour {
     int numChests;
     int chestsLeft;
 
+    float openTime = 2f;
+
 	void Start () {
 		numChests = GetComponentsInChildren<Chest>().Length;
         chestsLeft = numChests;
@@ -20,13 +22,19 @@ public class Level : MonoBehaviour {
     {
         if(--chestsLeft == 0)
         {
-            GameManager.gameManager.completeLevel();
+            StartCoroutine(startNextLevel());
         }
     }
 
     public Vector2 getPosition()
     {
         return start.getPosition();
+    }
+
+    IEnumerator startNextLevel()
+    {
+        yield return new WaitForSeconds(openTime);
+        GameManager.gameManager.completeLevel();
     }
 
 }
