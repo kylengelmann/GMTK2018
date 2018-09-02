@@ -57,7 +57,7 @@ public class TileWalk : MonoBehaviour {
         if (!isMoving && player.freeToAct && nextSet)
         {
             anim.ResetTrigger("move");
-            anim.ResetTrigger("move");
+            anim.SetTrigger("move");
             setMove(nextMove);
             nextSet = false;
             player.freeToAct = false;
