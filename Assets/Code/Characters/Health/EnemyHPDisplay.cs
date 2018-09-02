@@ -11,6 +11,11 @@ public class EnemyHPDisplay : HPDisplay {
 
     List<RectTransform> hpImgs = new List<RectTransform>();
 
+    private void Start()
+    {
+        transform.localScale = new Vector3(Mathf.Sign(transform.lossyScale.x)*transform.localScale.x, transform.localScale.y, transform.localScale.z);
+    }
+
     public override void createHP(int HP)
     {
         for (; hpImgs.Count > 0; hpImgs.RemoveAt(0))

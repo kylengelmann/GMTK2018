@@ -76,7 +76,7 @@ public class Attack : MonoBehaviour {
             }
             Dodge dodge = player.GetComponent<Dodge>();
 
-            if(!dodge.checkDodge(currentAttack, health != null))
+            if(!dodge.checkDodge(currentAttack, new Vector2(-transform.localScale.x, 0f), health != null))
             {
                 isCheckingHits = false;
                 wasDodged = false;

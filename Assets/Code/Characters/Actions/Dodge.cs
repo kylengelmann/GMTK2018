@@ -9,7 +9,10 @@ public class Dodge : MonoBehaviour {
 
     Health health;
 
-	void Start () {
+    SpriteRenderer sr;
+
+    void Start () {
+        sr = GetComponentInChildren<SpriteRenderer>();
         health = GetComponent<Health>();
         anim = GetComponent<Animator>();
         AnimationEventReceiver receiver;
@@ -72,11 +75,12 @@ public class Dodge : MonoBehaviour {
 
     bool isDodging;
 
-    public bool checkDodge(Attack.AttackType attackType, bool takeDamage)
+    public bool checkDodge(Attack.AttackType attackType, Vector2 direction, bool takeDamage)
     {
         if(!isDodging || dodging != attackType)
         {
-            walk.setMove(Vector2.left);
+            sr.flipX = direction.x > 0f;
+            walk.setMove(direction);
             if(takeDamage) {
                 health.gotHit();
             }
