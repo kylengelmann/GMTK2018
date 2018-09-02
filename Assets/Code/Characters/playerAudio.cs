@@ -32,6 +32,11 @@ public class playerAudio : MonoBehaviour {
     playerSounds.Play();
   }
 
+  public void keySound()
+  {
+    playerSounds.clip = keyPickUp;
+    playerSounds.Play();
+  }
   
   // Use this for initialization
   void Start () {

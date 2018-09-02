@@ -11,6 +11,7 @@ public class keyCollector : MonoBehaviour {
     {
         numKeys++;
         display.addKey();
+        GetComponentInChildren<playerAudio>().keySound();
     }
 
     public void useKey()
