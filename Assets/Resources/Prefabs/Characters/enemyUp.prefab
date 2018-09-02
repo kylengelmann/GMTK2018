@@ -22,7 +22,7 @@ GameObject:
   m_Layer: 0
   m_Name: ui
   m_TagString: Untagged
-  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -319,6 +319,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySounds: {fileID: 82075271021495562}
   enemySwoosh: {fileID: 8300000, guid: 635d16e99ace3144bad8a670a877bae3, type: 3}
+  enemyCharge: {fileID: 8300000, guid: 66378f4ad4cdf984bb4e9cc9ee51d082, type: 3}
 --- !u!114 &114161067124444246
 MonoBehaviour:
   m_ObjectHideFlags: 1
