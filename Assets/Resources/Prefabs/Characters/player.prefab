@@ -528,11 +528,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSounds: {fileID: 82619110557690504}
-  ouch1: {fileID: 8300000, guid: 25f8e978b09f1a0499222de8febe43c6, type: 3}
-  ouch2: {fileID: 8300000, guid: 27705009eaf96a14894a6020d7c9a0ac, type: 3}
-  ouch3: {fileID: 8300000, guid: 2f8bee495a9901d4bac9c3d548eab3b1, type: 3}
-  ouch4: {fileID: 8300000, guid: 958f9d9c6bbb59b47ae8758bcd024efb, type: 3}
-  ouch5: {fileID: 8300000, guid: 84ef8ee4da7d10649a327c311ba16c13, type: 3}
+  ouches:
+  - {fileID: 8300000, guid: 25f8e978b09f1a0499222de8febe43c6, type: 3}
+  - {fileID: 8300000, guid: 27705009eaf96a14894a6020d7c9a0ac, type: 3}
+  - {fileID: 8300000, guid: 2f8bee495a9901d4bac9c3d548eab3b1, type: 3}
+  - {fileID: 8300000, guid: 958f9d9c6bbb59b47ae8758bcd024efb, type: 3}
+  - {fileID: 8300000, guid: 84ef8ee4da7d10649a327c311ba16c13, type: 3}
   dieSound: {fileID: 8300000, guid: aae266769a155c445a240ecf6b884a68, type: 3}
   moveSound: {fileID: 8300000, guid: 4eb41a7604c318a4e870c8ce3453554b, type: 3}
   keyPickUp: {fileID: 8300000, guid: 15b4051373208b24f87951b4a0f0e049, type: 3}
