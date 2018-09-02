@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class playerReset : characterReset {
 
+    public void Start()
+    {
+        GameManager.gameManager.player = gameObject;
+    }
+
     public override void reset()
     {
-        GetComponent<TilePosition>().setPosition(GameManager.gameManager.levelStart.getPosition());
+        GetComponent<TilePosition>().setPosition(GameManager.gameManager.currentLevel.getPosition());
         player.freeToAct = true;
     }
 }

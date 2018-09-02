@@ -24,6 +24,8 @@ public class TileWalk : MonoBehaviour {
     SpriteRenderer sr;
     Animator anim;
 
+    bool isOnLadder;
+
     private void Start()
     {
         tilePos = GetComponent<TilePosition>();
@@ -61,11 +63,14 @@ public class TileWalk : MonoBehaviour {
         }
         if (!isMoving && player.freeToAct && nextSet)
         {
-            anim.ResetTrigger("move");
-            anim.SetTrigger("move");
-            setMove(nextMove);
+            if(setMove(nextMove))
+            {
+                player.freeToAct = false;
+                anim.SetBool("isOnLadder", isOnLadder);
+                anim.ResetTrigger("move");
+                anim.SetTrigger("move");
+            }
             nextSet = false;
-            player.freeToAct = false;
         }
         
         if(isMoving){
@@ -85,17 +90,39 @@ public class TileWalk : MonoBehaviour {
         }
     }
 
-    public void setMove(Vector2 moveDir)
+    public bool setMove(Vector2 moveDir)
     {
         this.moveDir = moveDir;
         t = 0f;
         lastPos = tilePos.getPosition();
 
+        if (isOnLadder && !Mathf.Approximately(moveDir.x, 0))
+        {
+            return false;
+        }
+
         Collider2D collider = Physics2D.OverlapPoint(lastPos + moveDir + new Vector2(.5f, .5f), ~LayerMask.GetMask("Player"));
         if (collider == null || collider.isTrigger) {
+
+            if(!isOnLadder && !Mathf.Approximately(moveDir.y, 0f)) {
+                if (collider != null && collider.gameObject.layer == LayerMask.NameToLayer("Ladder")) { 
+                    isOnLadder = true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else if(isOnLadder && (collider == null || !(collider.gameObject.layer == LayerMask.NameToLayer("Ladder"))))
+            {
+                isOnLadder = false;
+            }
+
             tilePos.setPosition(lastPos + moveDir, false);
             isMoving = true;
+            return true;
         }
+        return false;
     }
 
     void reset()

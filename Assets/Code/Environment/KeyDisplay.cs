@@ -17,6 +17,13 @@ public class KeyDisplay : MonoBehaviour {
         keys.Add(newKey);
     }
 
+    public void removeKey()
+    {
+        GameObject lastKey = keys[keys.Count - 1];
+        keys.RemoveAt(keys.Count - 1);
+        Destroy(lastKey);
+    }
+
     public void reset()
     {
         foreach(GameObject key in keys)
