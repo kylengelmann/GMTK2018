@@ -5,18 +5,14 @@ using UnityEngine;
 public class playerAudio : MonoBehaviour {
 
   public AudioSource playerSounds;
-  public AudioClip ouch1;
-  public AudioClip ouch2;
-  public AudioClip ouch3;
-  public AudioClip ouch4;
-  public AudioClip ouch5;
+    public AudioClip[] ouches;
   public AudioClip dieSound;
   public AudioClip moveSound;
   public AudioClip keyPickUp;
 
   public void ouch()
   {
-    playerSounds.clip = ouch1;
+    playerSounds.clip = ouches[Mathf.FloorToInt(Random.value*ouches.Length - .001f)];
     playerSounds.Play();
   }
 
