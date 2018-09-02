@@ -11,6 +11,8 @@ public class AnimationEventReceiver : MonoBehaviour {
     public System.Action onDodgeEnd;
     public System.Action startDodging;
     public System.Action endDodging;
+
+    public System.Action endGotHit;
     
 
     void OnAttackEnd()
@@ -58,6 +60,14 @@ public class AnimationEventReceiver : MonoBehaviour {
         if(endDodging != null)
         {
             endDodging.Invoke();
+        }
+    }
+
+    void EndGotHit()
+    {
+        if(endGotHit != null)
+        {
+            endGotHit.Invoke();
         }
     }
 

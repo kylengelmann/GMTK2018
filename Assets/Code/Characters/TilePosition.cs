@@ -17,9 +17,10 @@ public class TilePosition : MonoBehaviour {
         transform.position = new Vector3(pos.x, pos.y, transform.position.z);
     }
 
-    public void setPosition(Vector2 newPos)
+    public void setPosition(Vector2 newPos, bool shouldSetTransform = true)
     {
         position = new Vector2(Mathf.Round(newPos.x), Mathf.Round(newPos.y));
+        if(shouldSetTransform) setTransform(position);
     }
 
     public Vector2 getPosition()

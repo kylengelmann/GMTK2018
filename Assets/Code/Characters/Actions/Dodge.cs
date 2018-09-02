@@ -7,7 +7,10 @@ public class Dodge : MonoBehaviour {
     Animator anim;
     TileWalk walk;
 
+    Health health;
+
 	void Start () {
+        health = GetComponent<Health>();
         anim = GetComponent<Animator>();
         AnimationEventReceiver receiver;
         if (anim == null)
@@ -22,6 +25,7 @@ public class Dodge : MonoBehaviour {
         receiver.onDodgeEnd += onFinishDodge;
         receiver.startDodging += () => {isDodging = true;};
         receiver.endDodging += () => {isDodging = false;};
+        receiver.endGotHit += endGotHit;
 
         walk = GetComponent<TileWalk>();
 	}
@@ -31,7 +35,7 @@ public class Dodge : MonoBehaviour {
     string trigger;
 
 	void Update () {
-        if(dodging != Attack.AttackType.Invalid) {
+        if(dodging != Attack.AttackType.Invalid || !player.freeToAct) {
             return;
         }
         if (Input.GetKeyDown(KeyCode.DownArrow))
@@ -54,10 +58,7 @@ public class Dodge : MonoBehaviour {
         {
             anim.ResetTrigger(trigger);
             anim.SetTrigger(trigger);
-        }
-        if(dodging != Attack.AttackType.Invalid)
-        {
-            walk.canMove = false;
+            player.freeToAct = false;
         }
 
 	}
@@ -65,7 +66,8 @@ public class Dodge : MonoBehaviour {
     void onFinishDodge()
     {
         dodging = Attack.AttackType.Invalid;
-        walk.canMove = true;
+        //walk.canMove = true;
+        player.freeToAct = true;
     }
 
     bool isDodging;
@@ -74,9 +76,45 @@ public class Dodge : MonoBehaviour {
     {
         if(!isDodging || dodging != attackType)
         {
-            Debug.Log("Ow!");
+            walk.setMove(Vector2.left);
+            health.gotHit();
+            player.freeToAct = false;
+            if(health.HP == 0)
+            {
+                anim.ResetTrigger("died");
+                anim.SetTrigger("died");
+                GetComponent<BoxCollider2D>().enabled = false;
+            }
+            else
+            {
+                anim.ResetTrigger("wasHit");
+                anim.SetTrigger("wasHit");
+                
+            }
             return false;
         }
         return true;
+    }
+
+    void endGotHit()
+    {
+        anim.ResetTrigger("dodgeMid");
+        anim.ResetTrigger("dodgeDown");
+        anim.ResetTrigger("dodgeUp");
+        anim.ResetTrigger("move");
+        player.freeToAct = true;
+        isDodging = false;
+        dodging = Attack.AttackType.Invalid;
+        if (health.HP == 0)
+        {
+            GameManager.gameManager.resetLevel();
+        }
+    }
+
+    void reset()
+    {
+        isDodging = false;
+        dodging = Attack.AttackType.Invalid;
+        GetComponent<BoxCollider2D>().enabled = true;
     }
 }

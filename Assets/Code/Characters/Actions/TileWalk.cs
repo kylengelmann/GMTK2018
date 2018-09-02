@@ -22,14 +22,17 @@ public class TileWalk : MonoBehaviour {
 
     TilePosition tilePos;
 
+    Animator anim;
+
     private void Start()
     {
         tilePos = GetComponent<TilePosition>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     void Update () {
-        Debug.Log(canMove);
-        if(!nextSet) {
+
+        if(!nextSet && (player.freeToAct || isMoving)) {
             if (Input.GetKeyDown(KeyCode.D))
             {
                 nextSet = true;
@@ -51,10 +54,13 @@ public class TileWalk : MonoBehaviour {
                 nextMove = Vector2.down;
             }
         }
-        if (!isMoving && canMove && nextSet)
+        if (!isMoving && player.freeToAct && nextSet)
         {
+            anim.ResetTrigger("move");
+            anim.ResetTrigger("move");
             setMove(nextMove);
             nextSet = false;
+            player.freeToAct = false;
         }
         
         if(isMoving){
@@ -64,6 +70,7 @@ public class TileWalk : MonoBehaviour {
             {
                 isMoving = false;
                 tilePos.setTransform(tilePos.getPosition());
+                player.freeToAct = true;
                 return;
             }
 
@@ -81,8 +88,14 @@ public class TileWalk : MonoBehaviour {
 
         Collider2D collider = Physics2D.OverlapPoint(lastPos + moveDir + new Vector2(.5f, .5f), ~LayerMask.GetMask("Player"));
         if (collider == null || collider.isTrigger) {
-            tilePos.setPosition(lastPos + moveDir);
+            tilePos.setPosition(lastPos + moveDir, false);
             isMoving = true;
         }
+    }
+
+    void reset()
+    {
+        nextSet = false;
+        isMoving = false;
     }
 }
