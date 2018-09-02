@@ -33,7 +33,12 @@ public class Attack : MonoBehaviour {
 
     Animator anim;
 
+    bool wasDodged;
+
+    Health health;
+
 	void Start () {
+        health = GetComponent<Health>();
 		nextAttack = randomType();
         anim = GetComponent<Animator>();
         AnimationEventReceiver receiver;
@@ -65,13 +70,16 @@ public class Attack : MonoBehaviour {
         }
         else if(isCheckingHits)
         {
-            if (player == null) return;
+            if (player == null) {
+                wasDodged = false;
+                return;
+            }
             Dodge dodge = player.GetComponent<Dodge>();
-            if(dodge == null) return;
 
             if(!dodge.checkDodge(currentAttack))
             {
                 isCheckingHits = false;
+                wasDodged = false;
             }
         }
 	}
@@ -104,6 +112,7 @@ public class Attack : MonoBehaviour {
 
     void startAttack()
     {
+        wasDodged = true;
         isAttacking = true;
         string trigger = "attack";
         switch (nextAttack)
@@ -127,6 +136,18 @@ public class Attack : MonoBehaviour {
     void onAttackEnd()
     {
         isAttacking = false;
+        if(wasDodged)
+        {
+            health.gotHit();
+            if(health.HP == 0)
+            {
+                anim.SetTrigger("died");
+                foreach (BoxCollider2D box in GetComponents<BoxCollider2D>())
+                {
+                    box.enabled = false;
+                }
+            }
+        }
     }
 
     bool playerInRange;
@@ -156,5 +177,16 @@ public class Attack : MonoBehaviour {
         t = 0f;
         timeBetween = Mathf.Lerp(MinTimeBetweenAttacks, MaxTimeBetweenAttacks, Random.value);
     }
+
+    void reset()
+    {
+        anim.ResetTrigger("resetti");
+        anim.SetTrigger("resetti");
+        foreach (BoxCollider2D box in GetComponents<BoxCollider2D>())
+        {
+            box.enabled = true;
+        }
+    }
+
 
 }
