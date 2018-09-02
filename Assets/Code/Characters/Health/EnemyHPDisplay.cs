@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerHPDisplay : HPDisplay {
+public class EnemyHPDisplay : HPDisplay {
 
-    public float padding = 105f;
     public GameObject HPTemplate;
     public Sprite HasHP;
     public Sprite LostHP;
@@ -14,13 +13,13 @@ public class PlayerHPDisplay : HPDisplay {
 
     public override void createHP(int HP)
     {
-        for(; hpImgs.Count > 0; hpImgs.RemoveAt(0))
+        for (; hpImgs.Count > 0; hpImgs.RemoveAt(0))
         {
             Destroy(hpImgs[0].gameObject);
         }
-        for(int i = 0; i < HP; i++) {
+        for (int i = 0; i < HP; i++)
+        {
             RectTransform newHP = Instantiate(HPTemplate, transform).GetComponent<RectTransform>();
-            newHP.anchoredPosition = new Vector2(i*padding, 0f);
             hpImgs.Add(newHP);
             newHP.GetComponent<Image>().sprite = HasHP;
         }
@@ -30,6 +29,4 @@ public class PlayerHPDisplay : HPDisplay {
     {
         hpImgs[HPLeft].GetComponent<Image>().sprite = LostHP;
     }
-
-
 }

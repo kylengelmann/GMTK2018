@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 222823288340243278}
   - component: {fileID: 114623054349764928}
   m_Layer: 5
-  m_Name: Tankard
+  m_Name: PlayerTankard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
