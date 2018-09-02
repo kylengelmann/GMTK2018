@@ -18,6 +18,11 @@ public class Level : MonoBehaviour {
         chestsLeft = numChests;
 	}
 
+    void reset()
+    {
+        chestsLeft = numChests;
+    }
+
     public void openChest()
     {
         if(--chestsLeft == 0)

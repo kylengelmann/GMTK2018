@@ -37,6 +37,8 @@ public class Attack : MonoBehaviour {
 
     Health health;
 
+    enemyAudio sound;
+
 	void Start () {
         health = GetComponent<Health>();
 		nextAttack = randomType();
@@ -46,6 +48,7 @@ public class Attack : MonoBehaviour {
         {
             anim = GetComponentInChildren<Animator>();
             receiver = GetComponentInChildren<AnimationEventReceiver>();
+            sound = GetComponentInChildren<enemyAudio>();
         }
         else
         {
@@ -112,6 +115,7 @@ public class Attack : MonoBehaviour {
 
     void startAttack()
     {
+        sound.charge();
         wasDodged = true;
         isAttacking = true;
         string trigger = "attack";

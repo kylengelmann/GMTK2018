@@ -279,8 +279,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b540bd95ad60e194a9b1d4dc5a3285d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySounds: {fileID: 0}
+  enemySounds: {fileID: 82964078612099298}
   enemySwoosh: {fileID: 8300000, guid: 635d16e99ace3144bad8a670a877bae3, type: 3}
+  enemyCharge: {fileID: 8300000, guid: 72c73760c0a301a489a10ec74f3f4cba, type: 3}
 --- !u!114 &114527734577180260
 MonoBehaviour:
   m_ObjectHideFlags: 1
