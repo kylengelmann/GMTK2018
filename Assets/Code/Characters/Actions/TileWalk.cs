@@ -83,6 +83,10 @@ public class TileWalk : MonoBehaviour {
                 player.freeToAct = true;
                 return;
             }
+            else if(t >= moveTime*.6f)
+            {
+                player.freeToAct = true;
+            }
 
             float moveDist = movementCurve.Evaluate(t/moveTime);
 

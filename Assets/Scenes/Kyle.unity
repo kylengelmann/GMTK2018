@@ -1793,11 +1793,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 14
       objectReference: {fileID: 0}
-    - target: {fileID: 114008674907609602, guid: 360435523cf82b94b95729740f3559cc,
-        type: 2}
-      propertyPath: MinTimeBetweenAttacks
-      value: 0.25
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 360435523cf82b94b95729740f3559cc, type: 2}
   m_IsPrefabParent: 0
@@ -3463,7 +3458,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   start: {fileID: 1620007533}
-  next: {fileID: 0}
+  next: {fileID: 990088463}
 --- !u!1 &1013439031
 GameObject:
   m_ObjectHideFlags: 0
@@ -3753,6 +3748,7 @@ MonoBehaviour:
   player: {fileID: 0}
   level1: {fileID: 990088463}
   currentLevel: {fileID: 0}
+  speedIncrease: 0.15
 --- !u!4 &1063756176
 Transform:
   m_ObjectHideFlags: 0
