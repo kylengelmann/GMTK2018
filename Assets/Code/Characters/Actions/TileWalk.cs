@@ -22,13 +22,17 @@ public class TileWalk : MonoBehaviour {
 
     TilePosition tilePos;
 
+    Animator anim;
+
     private void Start()
     {
         tilePos = GetComponent<TilePosition>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     void Update () {
-        if(!nextSet) {
+
+        if(!nextSet && (player.freeToAct || isMoving)) {
             if (Input.GetKeyDown(KeyCode.D))
             {
                 nextSet = true;
@@ -50,10 +54,13 @@ public class TileWalk : MonoBehaviour {
                 nextMove = Vector2.down;
             }
         }
-        if (!isMoving && canMove && nextSet)
+        if (!isMoving && player.freeToAct && nextSet)
         {
+            anim.ResetTrigger("move");
+            anim.ResetTrigger("move");
             setMove(nextMove);
             nextSet = false;
+            player.freeToAct = false;
         }
         
         if(isMoving){
@@ -63,6 +70,7 @@ public class TileWalk : MonoBehaviour {
             {
                 isMoving = false;
                 tilePos.setTransform(tilePos.getPosition());
+                player.freeToAct = true;
                 return;
             }
 
@@ -89,6 +97,5 @@ public class TileWalk : MonoBehaviour {
     {
         nextSet = false;
         isMoving = false;
-        canMove = true;
     }
 }

@@ -14,6 +14,10 @@ public class PlayerHPDisplay : HPDisplay {
 
     public override void createHP(int HP)
     {
+        for(; hpImgs.Count > 0; hpImgs.RemoveAt(0))
+        {
+            Destroy(hpImgs[0].gameObject);
+        }
         for(int i = 0; i < HP; i++) {
             RectTransform newHP = Instantiate(HPTemplate, transform).GetComponent<RectTransform>();
             newHP.anchoredPosition = new Vector2(i*padding, 0f);
