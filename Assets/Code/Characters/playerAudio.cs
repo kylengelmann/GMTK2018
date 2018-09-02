@@ -8,6 +8,7 @@ public class playerAudio : MonoBehaviour {
     public AudioClip[] ouches;
   public AudioClip dieSound;
   public AudioClip moveSound;
+    public AudioClip scrapeSound;
   public AudioClip keyPickUp;
 
   public void ouch()
@@ -27,6 +28,12 @@ public class playerAudio : MonoBehaviour {
     playerSounds.clip = moveSound;
     playerSounds.Play();
   }
+
+    public void scrape()
+    {
+        playerSounds.clip = scrapeSound;
+        playerSounds.Play();
+    }
 
   public void keySound()
   {

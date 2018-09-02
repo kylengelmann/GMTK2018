@@ -104,6 +104,7 @@ public class TileWalk : MonoBehaviour {
         Collider2D collider = Physics2D.OverlapPoint(lastPos + moveDir + new Vector2(.5f, .5f), ~LayerMask.GetMask("Player"));
         if (collider == null || collider.isTrigger) {
 
+
             if(!isOnLadder && !Mathf.Approximately(moveDir.y, 0f)) {
                 if (collider != null && collider.gameObject.layer == LayerMask.NameToLayer("Ladder")) { 
                     isOnLadder = true;
@@ -115,11 +116,16 @@ public class TileWalk : MonoBehaviour {
             }
             else if(isOnLadder && (collider == null || !(collider.gameObject.layer == LayerMask.NameToLayer("Ladder"))))
             {
+                GetComponentInChildren<playerAudio>().scrape();
                 isOnLadder = false;
             }
 
             tilePos.setPosition(lastPos + moveDir, false);
             isMoving = true;
+            if(isOnLadder)
+            {
+                GetComponentInChildren<playerAudio>().scrape();
+            }
             return true;
         }
         return false;

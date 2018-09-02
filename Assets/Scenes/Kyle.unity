@@ -2732,16 +2732,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114580641211842296, guid: 5ae88ce4b302dd34bb30622773946ce5,
-        type: 2}
-      propertyPath: display
-      value: 
-      objectReference: {fileID: 2079874181}
     - target: {fileID: 114100706580145004, guid: 5ae88ce4b302dd34bb30622773946ce5,
         type: 2}
       propertyPath: display
       value: 
       objectReference: {fileID: 2029611490}
+    - target: {fileID: 114580641211842296, guid: 5ae88ce4b302dd34bb30622773946ce5,
+        type: 2}
+      propertyPath: display
+      value: 
+      objectReference: {fileID: 2079874181}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5ae88ce4b302dd34bb30622773946ce5, type: 2}
   m_IsPrefabParent: 0

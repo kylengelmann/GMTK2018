@@ -79,7 +79,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1507159989467054}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3, y: 0, z: 0.056365646}
+  m_LocalPosition: {x: -3, y: 1, z: 0.056365646}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4996460198460224}
@@ -536,6 +536,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 84ef8ee4da7d10649a327c311ba16c13, type: 3}
   dieSound: {fileID: 8300000, guid: aae266769a155c445a240ecf6b884a68, type: 3}
   moveSound: {fileID: 8300000, guid: 4eb41a7604c318a4e870c8ce3453554b, type: 3}
+  scrapeSound: {fileID: 8300000, guid: 1d895247ba424c345a48e654ced16a59, type: 3}
   keyPickUp: {fileID: 8300000, guid: 15b4051373208b24f87951b4a0f0e049, type: 3}
 --- !u!212 &212989705315919340
 SpriteRenderer:
