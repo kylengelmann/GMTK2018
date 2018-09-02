@@ -302,7 +302,7 @@ AudioSource:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1642142031634192}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f673563248379c5469fcfe149d8948d2, type: 3}
@@ -534,7 +534,7 @@ MonoBehaviour:
   ouch4: {fileID: 8300000, guid: 958f9d9c6bbb59b47ae8758bcd024efb, type: 3}
   ouch5: {fileID: 8300000, guid: 84ef8ee4da7d10649a327c311ba16c13, type: 3}
   dieSound: {fileID: 8300000, guid: aae266769a155c445a240ecf6b884a68, type: 3}
-  moveSound: {fileID: 8300000, guid: 1d895247ba424c345a48e654ced16a59, type: 3}
+  moveSound: {fileID: 8300000, guid: 4eb41a7604c318a4e870c8ce3453554b, type: 3}
   keyPickUp: {fileID: 8300000, guid: 15b4051373208b24f87951b4a0f0e049, type: 3}
 --- !u!212 &212989705315919340
 SpriteRenderer:
