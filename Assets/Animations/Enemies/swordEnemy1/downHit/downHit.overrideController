@@ -1,0 +1,14 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: downHit
+  m_Controller: {fileID: 9100000, guid: 7c7e73bd9a07dae4cacd631067d5cd82, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 1a355dc365bf42d498861335758304fe, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 1a96cc47d3d21e243b3a77c2a42d105d, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 0840e990643f1de499fa751abea82630, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 245b82d645e7dd742a626ccb36457d50, type: 2}
