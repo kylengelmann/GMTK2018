@@ -7,7 +7,10 @@ public class Dodge : MonoBehaviour {
     Animator anim;
     TileWalk walk;
 
+    Health health;
+
 	void Start () {
+        health = GetComponent<Health>();
         anim = GetComponent<Animator>();
         AnimationEventReceiver receiver;
         if (anim == null)
@@ -74,7 +77,12 @@ public class Dodge : MonoBehaviour {
     {
         if(!isDodging || dodging != attackType)
         {
-            Debug.Log("Ow!");
+            walk.setMove(Vector2.left);
+            health.gotHit();
+            if(health.HP == 0)
+            {
+                GameManager.gameManager.resetLevel();
+            }
             return false;
         }
         return true;

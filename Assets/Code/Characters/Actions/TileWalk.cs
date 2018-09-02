@@ -28,7 +28,6 @@ public class TileWalk : MonoBehaviour {
     }
 
     void Update () {
-        Debug.Log(canMove);
         if(!nextSet) {
             if (Input.GetKeyDown(KeyCode.D))
             {
@@ -81,8 +80,15 @@ public class TileWalk : MonoBehaviour {
 
         Collider2D collider = Physics2D.OverlapPoint(lastPos + moveDir + new Vector2(.5f, .5f), ~LayerMask.GetMask("Player"));
         if (collider == null || collider.isTrigger) {
-            tilePos.setPosition(lastPos + moveDir);
+            tilePos.setPosition(lastPos + moveDir, false);
             isMoving = true;
         }
+    }
+
+    void reset()
+    {
+        nextSet = false;
+        isMoving = false;
+        canMove = true;
     }
 }

@@ -65,7 +65,10 @@ public class Attack : MonoBehaviour {
             Dodge dodge = player.GetComponent<Dodge>();
             if(dodge == null) return;
 
-            dodge.checkDodge(currentAttack);
+            if(!dodge.checkDodge(currentAttack))
+            {
+                isCheckingHits = false;
+            }
         }
 	}
 
