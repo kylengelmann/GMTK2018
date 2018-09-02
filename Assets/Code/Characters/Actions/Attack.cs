@@ -14,6 +14,10 @@ public class Attack : MonoBehaviour {
 
     bool isCheckingHits;
 
+    public bool canAttackUp = true;
+    public bool canAttackMid = true;
+    public bool canAttackDown = true;
+
     public enum AttackType
     {
         Invalid = -1,
@@ -76,7 +80,24 @@ public class Attack : MonoBehaviour {
 
     AttackType randomType()
     {
-        return (AttackType) Mathf.Min(Mathf.FloorToInt(Random.value*3f), 2);
+        AttackType result = AttackType.Invalid;
+        while(result == AttackType.Invalid)
+        {
+            result = (AttackType)Mathf.Min(Mathf.FloorToInt(Random.value * 3f), 2);
+            if(result == AttackType.up && !canAttackUp)
+            {
+                result = AttackType.Invalid;
+            }
+            else if (result == AttackType.down && !canAttackDown)
+            {
+                result = AttackType.Invalid;
+            }
+            else if (result == AttackType.mid && !canAttackMid)
+            {
+                result = AttackType.Invalid;
+            }
+        }
+        return result;
     }
 
     bool isAttacking;

@@ -48,7 +48,7 @@ public class Dodge : MonoBehaviour {
             trigger = "dodgeUp";
             dodging = Attack.AttackType.down;
         }
-        else if(Input.GetKeyDown(KeyCode.LeftArrow))
+        else if(Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
         {
             trigger = "dodgeMid";
             dodging = Attack.AttackType.mid;

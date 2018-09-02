@@ -21,13 +21,14 @@ public class TileWalk : MonoBehaviour {
     float t;
 
     TilePosition tilePos;
-
+    SpriteRenderer sr;
     Animator anim;
 
     private void Start()
     {
         tilePos = GetComponent<TilePosition>();
         anim = GetComponentInChildren<Animator>();
+        sr = GetComponentInChildren<SpriteRenderer>();
     }
 
     void Update () {
@@ -37,21 +38,25 @@ public class TileWalk : MonoBehaviour {
             {
                 nextSet = true;
                 nextMove = Vector2.right;
+                sr.flipX = false;
             }
             else if(Input.GetKeyDown(KeyCode.A))
             {
                 nextSet = true;
                 nextMove = Vector2.left;
+                sr.flipX = true;
             }
             else if(Input.GetKeyDown(KeyCode.W))
             {
                 nextSet = true;
                 nextMove = Vector2.up;
+                sr.flipX = false;
             }
             else if(Input.GetKeyDown(KeyCode.S))
             {
                 nextSet = true;
                 nextMove = Vector2.down;
+                sr.flipX = false;
             }
         }
         if (!isMoving && player.freeToAct && nextSet)
