@@ -76,7 +76,7 @@ public class Attack : MonoBehaviour {
             }
             Dodge dodge = player.GetComponent<Dodge>();
 
-            if(!dodge.checkDodge(currentAttack))
+            if(!dodge.checkDodge(currentAttack, health != null))
             {
                 isCheckingHits = false;
                 wasDodged = false;
@@ -136,7 +136,7 @@ public class Attack : MonoBehaviour {
     void onAttackEnd()
     {
         isAttacking = false;
-        if(wasDodged)
+        if(wasDodged && health != null)
         {
             health.gotHit();
             if(health.HP == 0)

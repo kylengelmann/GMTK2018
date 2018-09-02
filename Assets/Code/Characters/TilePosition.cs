@@ -7,7 +7,7 @@ public class TilePosition : MonoBehaviour {
 
     Vector2 position;
 
-    void Start () {
+    void Awake () {
         position = new Vector2(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y));
         setTransform(position);
     }
