@@ -72,12 +72,14 @@ public class Dodge : MonoBehaviour {
 
     bool isDodging;
 
-    public bool checkDodge(Attack.AttackType attackType)
+    public bool checkDodge(Attack.AttackType attackType, bool takeDamage)
     {
         if(!isDodging || dodging != attackType)
         {
             walk.setMove(Vector2.left);
-            health.gotHit();
+            if(takeDamage) {
+                health.gotHit();
+            }
             player.freeToAct = false;
             if(health.HP == 0)
             {
