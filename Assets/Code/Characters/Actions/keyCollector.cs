@@ -13,6 +13,12 @@ public class keyCollector : MonoBehaviour {
         display.addKey();
     }
 
+    public void useKey()
+    {
+        numKeys --;
+        display.removeKey();
+    }
+
     private void reset()
     {
         numKeys = 0;
