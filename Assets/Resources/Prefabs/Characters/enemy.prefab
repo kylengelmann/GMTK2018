@@ -444,7 +444,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySounds: {fileID: 82556416116290734}
   enemySwoosh: {fileID: 8300000, guid: 635d16e99ace3144bad8a670a877bae3, type: 3}
-  enemyCharge: {fileID: 8300000, guid: 66378f4ad4cdf984bb4e9cc9ee51d082, type: 3}
+  enemyCharge: {fileID: 8300000, guid: 72c73760c0a301a489a10ec74f3f4cba, type: 3}
 --- !u!212 &212085370341810850
 SpriteRenderer:
   m_ObjectHideFlags: 1
