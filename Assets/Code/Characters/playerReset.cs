@@ -7,6 +7,7 @@ public class playerReset : characterReset {
     public void Start()
     {
         GameManager.gameManager.player = gameObject;
+        transform.SetParent(GameManager.gameManager.currentLevel.transform);
         BroadcastMessage("reset");
     }
 
